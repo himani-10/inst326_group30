@@ -8,14 +8,13 @@ class Caregiver:
         self.email = email
         self.pay_rate = pay_rate
         self.hours_worked = 0
-        self.schedule = {}  # Dictionary with date keys and shift times as values
+        self.schedule = {}  
     
     def update_contact_info(self, phone: str = None, email: str = None):
         if phone:
             self.phone = phone
         if email:
             self.email = email
-        print(f"Updated contact info for {self.name}")
     
     def log_hours(self, date: datetime, shift: str, hours: float):
         self.schedule[date.strftime('%Y-%m-%d')] = shift
@@ -38,15 +37,11 @@ class CareManager:
     def update_caregiver_info(self, name: str, phone: str = None, email: str = None):
         if name in self.caregivers:
             self.caregivers[name].update_contact_info(phone, email)
-        else:
-            print(f"Caregiver {name} not found.")
     
     def assign_shift(self, caregiver_name: str, date: datetime, shift_type: str):
         if caregiver_name in self.caregivers and shift_type in self.shifts:
             hours = self.shifts[shift_type][1] - self.shifts[shift_type][0]
             self.caregivers[caregiver_name].log_hours(date, shift_type, hours)
-        else:
-            print(f"Invalid caregiver or shift type.")
     
     def display_schedule(self):
         for name, caregiver in self.caregivers.items():
@@ -57,8 +52,7 @@ class CareManager:
     def get_total_hours(self, name: str):
         if name in self.caregivers:
             print(f"{name} has worked {self.caregivers[name].hours_worked} hours.")
-        else:
-            print(f"Caregiver {name} not found.")
+
     
     def get_daily_caregivers(self, date: datetime):
         caregivers_on_shift = {shift: [] for shift in self.shifts}
