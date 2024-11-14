@@ -1,8 +1,8 @@
 class Caregiver:
     def __init__(self, name, pay_rate):
-        self.__name = name  # Private attribute
-        self.__pay_rate = pay_rate  # Private attribute
-        self.__weekly_hours = 0  # Private attribute
+        self.__name = name  
+        self.__pay_rate = pay_rate  
+        self.__weekly_hours = 0  
 
     # Method to log hours worked for the week
     def log_hours(self, hours):
