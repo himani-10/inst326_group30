@@ -21,3 +21,5 @@ This module provides scheduling functionality, managing caregiver availability a
 ### 3. Payroll and Reporting (`payroll.py`)
 This module calculates the weekly and monthly gross pay for each caregiver based on hours logged, providing a weekly payroll report.
 
+### 4. Main Setting ('main.py')
+Main entry point for interacting with the system.
