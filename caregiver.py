@@ -80,3 +80,15 @@ class CareManager:
             shift = caregiver.schedule.get(date_str)
             if shift:
                 print(f" - {caregiver.name}: {shift}")
+
+# Example test
+manager = CareManager()
+manager.add_caregiver("Alice", "123-456-7890", "alice@example.com", 20.0)
+manager.add_caregiver("Bob", "987-654-3210", "bob@example.com", 22.0)
+
+date = datetime.now()
+manager.assign_shift("Alice", date, "morning")
+manager.assign_shift("Bob", date, "afternoon")
+
+manager.display_schedule()
+manager.get_daily_caregivers(date)
