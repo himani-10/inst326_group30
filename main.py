@@ -1,23 +1,15 @@
-from datetime import datetime
-from caregiver import CareManager, Caregiver
-from scheduler import Schedule
-from payroll import Payroll
-
 def main():
     print("Welcome to the Caregiver Management System")
 
-    # Initialize systems
     care_manager = CareManager()
     payroll_system = Payroll()
-    month = int(input("Enter month (as a number 1-12) for scheduling: "))
+    month = int(input("Enter month (1-12) for scheduling: "))
     year = int(input("Enter year for scheduling: "))
     schedule = Schedule(month, year)
 
-    # Add example caregivers (you can modify or prompt for real input)
     care_manager.add_caregiver("Alice", "123-456-7890", "alice@example.com", 20.0)
     care_manager.add_caregiver("Bob", "987-654-3210", "bob@example.com", 22.0)
 
-    # Add caregivers to payroll
     for caregiver in care_manager.caregivers.values():
         payroll_system.add_caregiver(caregiver)
 
@@ -50,7 +42,8 @@ def main():
             try:
                 date = datetime.strptime(date_input, "%Y-%m-%d")
                 care_manager.assign_shift(name, date, shift_type)
-                schedule.set_availability(care_manager.caregivers[name], date.day, "AM" if shift_type == "morning" else "PM", "assigned")
+                shift_code = "AM" if shift_type == "morning" else "PM"
+                schedule.set_availability(care_manager.caregivers[name], date.day, shift_code, "assigned")
             except ValueError:
                 print("Invalid date format. Please enter as YYYY-MM-DD.")
 
@@ -62,7 +55,7 @@ def main():
             hours = float(input("Enter hours worked: "))
             caregiver = care_manager.caregivers.get(name)
             if caregiver:
-                date = datetime.now()  # Assuming current date; you can prompt for specific dates
+                date = datetime.now()
                 caregiver.log_hours(date, "custom shift", hours)
             else:
                 print("Caregiver not found.")
@@ -71,11 +64,10 @@ def main():
             payroll_system.display_weekly_report()
 
         elif choice == '7':
-            print("Exiting program.")
+            print("Exiting the program.")
             break
 
         else:
             print("Invalid choice. Please try again.")
 
-if __name__ == "__main__":
-    main()
+main()
